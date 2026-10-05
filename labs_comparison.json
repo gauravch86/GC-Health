@@ -1,0 +1,1062 @@
+{
+  "patient": {
+    "name": "Mr Gaurav Chaudhary",
+    "dob": "1986-06-27",
+    "sex": "male",
+    "approx_age_years": 40,
+    "blood_group": "O+",
+    "smoking": "Regular smoker from 2021 (user-stated). 2025 Bluecrest scored smoked tobacco last 12 mo YES (AMBER). 2026 MER form marked smoking no — reconcile with clinician.",
+    "smoking_start_year": 2021,
+    "alcohol": "light (less than bottle wine / 20cl spirits per week)",
+    "residence": "India",
+    "prior_residence": [
+      "UK 2 years",
+      "Peru (Lima) 5 years"
+    ]
+  },
+  "fitness_context": {
+    "uk_2025": {
+      "run_distance_km": "5-15",
+      "weight_kg_range": "110-115",
+      "note": "Capable of sustained running at 5–15 km while weighing 110–115 kg in UK 2025"
+    },
+    "india_return_sep_2025": {
+      "run_distance_km": "3-5",
+      "note": "After return to India Sep 2025, running capacity ~3–5 km"
+    },
+    "last_6_months": {
+      "activity": "freestyle weight training primarily; less cardio",
+      "symptoms_of_weakness": false,
+      "note": "No symptoms of weakness. For ~10 years can catch up on physical activity whenever he becomes regular, despite grown weight."
+    },
+    "framing": "Capable, intermittently athletic person with excess weight — NOT frail or chronically sick. High fitness capacity makes silent CAD less typical but does NOT cancel 2026 ECG read. Athlete/fit-runner pattern better explains 2025 resting HR 54."
+  },
+  "disclaimer": "Educational analysis of lab reports for personal use only. NOT a medical diagnosis or prescription. See a licensed cardiologist for the 2026 ECG finding (calm clinical correlation — fitness capacity is relevant context). GP/physician + Ayurvedic doctor before medicines or supplements. Oct 2026 hs-CRP 6.85 is clinically relevant; do not invent COVID causation for it. Quit/cut smoking remains important for BP, lipids, inflammation, and fitness ceiling.",
+  "user_priorities": [
+    "What is increasing weight from a medical/diagnostic perspective?",
+    "What path to become totally fit?",
+    "Eosinophils: out of range ~2 years (annoying on reports; no head-pain symptom)",
+    "Liver and other labs he takes care of from time to time",
+    "BP high side for 2–3 years"
+  ],
+  "reports": [
+    {
+      "id": "healthians_2021_may",
+      "provider": "Healthians (historical chart points only)",
+      "location": "India",
+      "date": "2021-05",
+      "approx_date_label": "May 2021",
+      "note": "Charts in Jan 2022 Smart Report show May'21 axis points, but exact numeric values were NOT OCR-readable — no invented values stored."
+    },
+    {
+      "id": "healthians_2022_jan04",
+      "provider": "Healthians Smart Report",
+      "location": "India",
+      "date": "2022-01-04",
+      "approx_date_label": "4 Jan 2022",
+      "booking_id": "4421193260",
+      "age_on_report": 34
+    },
+    {
+      "id": "healthians_2022_jan23",
+      "provider": "Healthians",
+      "location": "India",
+      "date": "2022-01-23",
+      "approx_date_label": "23 Jan 2022",
+      "booking_id": "4584095882",
+      "note": "Narrow panel — HIV Duo only"
+    },
+    {
+      "id": "bluecrest_2025",
+      "provider": "Bluecrest Wellness",
+      "location": "Basingstoke, UK",
+      "date": "2025-09",
+      "approx_date_label": "Sept 2025"
+    },
+    {
+      "id": "medibuddy_2026",
+      "provider": "Medibuddy / Molecular Diagnostics (Ericsson PEHC)",
+      "location": "India",
+      "date": "2026-09-16",
+      "approx_date_label": "16 Sep 2026"
+    },
+    {
+      "id": "healthians_2026_oct05",
+      "provider": "Healthians Life Maximiser Plus Male (Smart Report 3.0)",
+      "location": "India",
+      "date": "2026-10-05",
+      "approx_date_label": "5 Oct 2026",
+      "booking_id": "20625068428",
+      "barcode": "D1368856",
+      "sample_collection": "05/Oct/2026 09:55AM",
+      "health_score": "84/100",
+      "age_on_report": 40,
+      "note": "Full panel. Comparative Smart Report axis also shows booking 6450219353 / 15 Sep 2022 (separate from Jan 2022 Healthians already stored)."
+    }
+  ],
+  "years_key": [
+    "2021_may",
+    "2022_jan",
+    "2025_sep",
+    "2026_sep",
+    "2026_oct"
+  ],
+  "anthropometrics": {
+    "height_cm": {
+      "2021_may": null,
+      "2022_jan": null,
+      "2025_sep": 183,
+      "2026_sep": 188,
+      "note": "2022 Health Karma empty. Height 183 cm (UK 2025 & Healthians Oct 2026 / 6'0\") vs 188 cm Medibuddy Sep 2026 — prefer 183 cm / 6'0\" for BMI trajectory.",
+      "2026_oct": 183
+    },
+    "weight_kg": {
+      "2021_may": null,
+      "2022_jan": null,
+      "2025_sep": 109.6,
+      "2026_sep": 110,
+      "2026_oct": 104
+    },
+    "bmi": {
+      "2021_may": null,
+      "2022_jan": null,
+      "2025_sep": {
+        "value": 32.7,
+        "flag": "RED"
+      },
+      "2026_sep": {
+        "value": 31.12,
+        "flag": "AMBER",
+        "note": "Still obese; slight drop partly taller recorded height"
+      },
+      "2026_oct": {
+        "value": 31.05,
+        "flag": "AMBER",
+        "note": "Down from ~110 kg Sep 2026 / 109.6 UK — real progress; still obese class I / South-Asian high-risk zone"
+      }
+    },
+    "body_fat_pct": {
+      "2025_sep": {
+        "value": 30.1,
+        "flag": "RED"
+      },
+      "2026_sep": null,
+      "2026_oct": null
+    },
+    "visceral_fat": {
+      "2025_sep": {
+        "value": 13,
+        "flag": "AMBER"
+      },
+      "2026_sep": null,
+      "2026_oct": null
+    },
+    "metabolic_age": {
+      "2025_sep": {
+        "value": 54,
+        "flag": "RED",
+        "chrono_approx": 39
+      },
+      "2026_sep": null,
+      "2026_oct": null
+    },
+    "fat_free_mass_kg": {
+      "2025_sep": 76.6
+    },
+    "bmr_kcal": {
+      "2025_sep": 2302
+    }
+  },
+  "vitals": {
+    "bp_mmHg": {
+      "2021_may": null,
+      "2022_jan": null,
+      "2025_sep": {
+        "systolic": 142,
+        "diastolic": 96,
+        "flag": "RED"
+      },
+      "2026_sep": {
+        "systolic": 134,
+        "diastolic": 91,
+        "flag": "AMBER"
+      },
+      "user_note": "BP high side for ~2–3 years (user-stated)",
+      "note": "No BP in 2022 Healthians or Oct 2026 Healthians (No Data). Keep home log; last clinic: 134/91 Sep 2026, 142/96 UK 2025.",
+      "2026_oct": null
+    },
+    "pulse_or_hr": {
+      "2025_sep": {
+        "value": 54,
+        "context": "resting ECG — consistent with fit-runner conditioning",
+        "flag": "AMBER_lab_but_fitness_explains"
+      },
+      "2026_sep": {
+        "value": 72,
+        "context": "clinic pulse",
+        "flag": "GREEN"
+      },
+      "2026_oct": null
+    }
+  },
+  "ecg": {
+    "2022_jan": null,
+    "2025_sep": {
+      "resting_hr": 54,
+      "rhythm": "sinus normal",
+      "q_waves": "WNL",
+      "qtc": "WNL",
+      "overall": "AMBER (low HR only) — fit-runner pattern plausible",
+      "infarct_read": false
+    },
+    "2026_sep": {
+      "datetime": "2026-09-16T10:10",
+      "vendor": "Tricog",
+      "ar": 65,
+      "vr": 65,
+      "qrs_ms": 108,
+      "qt_ms": 404,
+      "qtc_bazett_ms": 421,
+      "pr_ms": 198,
+      "pr_note": "upper normal",
+      "axis": {
+        "p": 35,
+        "r": -4,
+        "t": 22
+      },
+      "interpretation": "Sinus Rhythm, Inferior Infarct, probably old. Please correlate clinically.",
+      "infarct_read": true,
+      "urgency": "Cardiologist review for clinical correlation — calm, not emergency-fear framing. High fitness capacity makes silent CAD less typical but does NOT cancel the ECG read.",
+      "fitness_reframe": "Capable of 5–15 km runs at 110–115 kg in UK 2025; no weakness symptoms. Athlete/fit pattern explains HR 54 better than frailty narrative."
+    },
+    "comparison_note": "2025: Q waves WNL / no infarct call; HR 54 fits runner. 2026 Sep: Inferior Infarct (probably old). Oct 2026 Healthians had no ECG. See cardiologist — fitness is reassuring context, not a cancel.",
+    "2026_oct": null
+  },
+  "cbc": {
+    "hb_g_dL": {
+      "2022_jan": {
+        "value": 15.3,
+        "flag": "GREEN"
+      },
+      "2025_sep": {
+        "value": 15.4,
+        "source_g_L": 154,
+        "flag": "GREEN"
+      },
+      "2026_sep": {
+        "value": 14.9,
+        "flag": "GREEN"
+      },
+      "2026_oct": {
+        "value": 14.8,
+        "flag": "GREEN"
+      }
+    },
+    "tlc_x10e9": {
+      "2022_jan": {
+        "value": 9.8
+      },
+      "2025_sep": {
+        "value": 6.4
+      },
+      "2026_sep": {
+        "value": 9.07,
+        "source_cells_uL": 9070
+      },
+      "2026_oct": {
+        "value": 7.1
+      }
+    },
+    "pcv_pct": {
+      "2022_jan": 45.5,
+      "2026_sep": 42.8,
+      "2026_oct": 45.2
+    },
+    "rbc": {
+      "2022_jan": 5.4,
+      "2025_sep": 5.35,
+      "2026_sep": 5.2,
+      "2026_oct": null
+    },
+    "mcv": {
+      "2022_jan": 84.0,
+      "2026_sep": 82.4,
+      "2026_oct": 85.9
+    },
+    "mch": {
+      "2022_jan": 28.2,
+      "2025_sep": 28.8,
+      "2026_sep": 28.7,
+      "2026_oct": 28.2
+    },
+    "mchc": {
+      "2022_jan": 33.6,
+      "2026_sep": 34.8,
+      "2026_oct": 32.8
+    },
+    "rdw_cv": {
+      "2022_jan": {
+        "value": 15.0,
+        "flag": "HIGH",
+        "ref": "12.1-13.6"
+      },
+      "2026_sep": {
+        "value": 14
+      },
+      "2026_oct": {
+        "value": 15.2,
+        "flag": "HIGH",
+        "ref": "11.6-14.0"
+      }
+    },
+    "rdw_sd": {
+      "2022_jan": 44.6,
+      "2026_sep": 43.9,
+      "2026_oct": 36.7
+    },
+    "platelets": {
+      "2022_jan": 258,
+      "2025_sep": 263,
+      "2026_sep": 256,
+      "2026_oct": 197
+    },
+    "mpv": {
+      "2022_jan": 8.4,
+      "2026_sep": 12.1,
+      "2026_oct": {
+        "value": 11.0,
+        "flag": "HIGH",
+        "ref": "7-9"
+      }
+    },
+    "esr_mm_hr": {
+      "2022_jan": {
+        "value": 17,
+        "flag": "HIGH",
+        "ref": "0-10",
+        "ignored_reason": "covid_at_time",
+        "ui_narrative": "deemphasized — user attributes peri-COVID inflammation; do not use as chronic smoking/disease evidence"
+      },
+      "2025_sep": null,
+      "2026_sep": null,
+      "2026_oct": {
+        "value": 8,
+        "flag": "GREEN",
+        "ref": "0-10",
+        "note": "Improved vs ESR 17 Jan 2022"
+      }
+    },
+    "differential_pct": {
+      "2022_jan": {
+        "N": 60.4,
+        "L": 27.1,
+        "M": 8.6,
+        "E": 3.6,
+        "B": 0.3,
+        "eos_flag": "NORMAL"
+      },
+      "2025_sep": {
+        "E_approx": 10.8,
+        "note": "approx from abs 0.69 / WBC 6.4"
+      },
+      "2026_sep": {
+        "N": 45.2,
+        "L": 41.9,
+        "E": 7.2,
+        "M": 5.4,
+        "B": 0.3,
+        "eos_flag": "HIGH"
+      },
+      "2026_oct": {
+        "N": 52.1,
+        "L": 36.3,
+        "M": 6.6,
+        "E": 5.0,
+        "B": 0.0,
+        "eos_flag": "NORMAL",
+        "note": "WIN: eosinophils back in range after Ayurvedic medicines (user-stated)"
+      }
+    },
+    "absolute": {
+      "neutrophils": {
+        "2022_jan": 5.92,
+        "2025_sep": 3.0,
+        "2026_sep": 4.1,
+        "2026_oct": 3.71
+      },
+      "lymphocytes": {
+        "2022_jan": 2.66,
+        "2025_sep": 2.44,
+        "2026_sep": {
+          "value": 3.8,
+          "flag": "HIGH"
+        },
+        "2026_oct": 2.58
+      },
+      "monocytes": {
+        "2022_jan": 0.84,
+        "2025_sep": 0.2,
+        "2026_sep": 0.49,
+        "2026_oct": 0.47
+      },
+      "eosinophils": {
+        "2022_jan": {
+          "value": 0.35,
+          "flag": "NORMAL",
+          "ref": "0.02-0.5"
+        },
+        "2025_sep": {
+          "value": 0.69,
+          "flag": "AMBER"
+        },
+        "2026_sep": {
+          "value": 0.65,
+          "flag": "HIGH"
+        },
+        "user_concern": "Was out of range ~2 years (annoying on reports; no head-pain symptom). NOW NORMAL — celebrate and maintain.",
+        "trend_note": "NORMAL early-2022 → HIGH 2025–Sep 2026 (~2 years) → NORMAL again 5 Oct 2026 (5.0% / AEC 0.36) after Ayurvedic medicines. Maintain regimen with vaidya; don't stop abruptly. CBC otherwise OK.",
+        "2026_oct": {
+          "value": 0.36,
+          "flag": "NORMAL",
+          "ref": "0.02-0.5",
+          "win_note": "STABLE/NORMAL after Ayurvedic Rx — was HIGH ~7.2%/0.65 Sep 2026 Medibuddy, ~10.8%/0.69 UK 2025"
+        }
+      },
+      "basophils": {
+        "2022_jan": 0.03,
+        "2025_sep": 0.0,
+        "2026_sep": 0.03,
+        "2026_oct": 0.0
+      }
+    },
+    "platelet_indices_2026": {
+      "PCT": {
+        "value": 0.31,
+        "flag": "HIGH"
+      },
+      "PLCC": {
+        "value": 105,
+        "flag": "HIGH"
+      },
+      "PLCR": 41.1,
+      "PDW": 16.2,
+      "MPV": 12.1
+    }
+  },
+  "inflammation": {
+    "crp_mg_L": {
+      "2022_jan": {
+        "value": 9.3,
+        "flag": "HIGH",
+        "ref": "<5",
+        "ignored_reason": "covid_at_time"
+      },
+      "2025_sep": null,
+      "2026_sep": null,
+      "2026_oct": null
+    },
+    "hs_crp_mg_L": {
+      "2022_jan": {
+        "value": 8.12,
+        "flag": "HIGH",
+        "ref": "<1.0",
+        "ignored_reason": "covid_at_time",
+        "note": "Raw number retained; UI/prose MUST NOT drive conclusions from CRP/hs-CRP. User: rose due to COVID then."
+      },
+      "2025_sep": null,
+      "2026_sep": null,
+      "2026_oct": {
+        "value": 6.85,
+        "flag": "HIGH",
+        "ref": "0-1.0",
+        "note": "NEW and clinically relevant (not COVID-era). Comparative Smart Report showed Sep 2022 hsCRP 3.95. AHA/CDC strata historically: <1 low, 1–3 intermediate, >3 high — interpret with South Asian caveats + cardiologist."
+      },
+      "2022_sep15_comparative": {
+        "value": 3.95,
+        "source": "Healthians Smart Report comparative booking 6450219353 / 15 Sep 2022",
+        "note": "Different booking from Jan 2022 Healthians already stored; retained for trend only."
+      }
+    },
+    "narrative_policy": "IGNORE framing Jan 2022 CRP/hs-CRP/ESR as COVID-only conclusions, but Oct 2026 hs-CRP 6.85 IS NEW and relevant for CV risk discussion. Do not invent COVID causation for 2026. Chart 2026 hsCRP; keep 2022 raw numbers in data."
+  },
+  "metabolic": {
+    "hba1c_pct": {
+      "2022_jan": {
+        "value": 5.3,
+        "flag": "GREEN",
+        "ref": "4.2-5.7"
+      },
+      "2025_sep": {
+        "value": 5.6,
+        "source_mmol_mol": 38,
+        "flag": "GREEN"
+      },
+      "2026_sep": null,
+      "missing_2026": false,
+      "2026_oct": {
+        "value": 6.0,
+        "flag": "HIGH_prediabetes",
+        "ref": "4.2-5.7",
+        "ada_band": "5.7–6.4 prediabetes",
+        "note": "Up from 5.3 (2022) and 5.6 (2025)"
+      }
+    },
+    "eag_mg_dL": {
+      "2022_jan": 105.41,
+      "2026_oct": 125.5
+    },
+    "fasting_glucose_mg_dL": {
+      "2022_jan": {
+        "value": 92,
+        "flag": "NORMAL",
+        "ref": "70-100"
+      },
+      "2025_sep": null,
+      "2026_sep": {
+        "value": 94,
+        "flag": "NORMAL"
+      },
+      "2026_oct": {
+        "value": 91.3,
+        "flag": "NORMAL",
+        "ref": "70-100"
+      }
+    },
+    "fasting_insulin_mU_L": {
+      "2026_oct": {
+        "value": 21.45,
+        "flag": "UPPER_NORMAL",
+        "ref": "3-25",
+        "note": "Upper-normal; with HbA1c 6% and BMI 31 suggests insulin-resistance trajectory"
+      }
+    }
+  },
+  "lipids": {
+    "2022_jan": {
+      "total_chol_mg_dL": {
+        "value": 183,
+        "approx_mmol_L": 4.73,
+        "flag": "GREEN_desirable_under_200"
+      },
+      "tg_mg_dL": {
+        "value": 167,
+        "approx_mmol_L": 1.89,
+        "flag": "HIGH_borderline"
+      },
+      "hdl_mg_dL": {
+        "value": 40.0,
+        "approx_mmol_L": 1.03,
+        "flag": "BORDERLINE_low"
+      },
+      "ldl_mg_dL": {
+        "value": 130,
+        "approx_mmol_L": 3.36,
+        "flag": "HIGH_borderline"
+      },
+      "vldl_mg_dL": {
+        "value": 33.4,
+        "flag": "HIGH"
+      },
+      "chol_hdl_ratio": {
+        "value": 4.58,
+        "flag": "HIGH"
+      },
+      "ldl_hdl_ratio": {
+        "value": 3.25,
+        "flag": "HIGH"
+      },
+      "non_hdl_mg_dL": {
+        "value": 143.0,
+        "approx_mmol_L": 3.7,
+        "flag": "OK_vs_their_0_160"
+      }
+    },
+    "2025_sep": {
+      "tg_mmol_L": {
+        "value": 1.8,
+        "approx_mg_dL": 159,
+        "flag": "GREEN"
+      },
+      "total_chol_mmol_L": {
+        "value": 5.27,
+        "approx_mg_dL": 204,
+        "flag": "AMBER"
+      },
+      "hdl_mmol_L": {
+        "value": 0.9,
+        "approx_mg_dL": 35,
+        "flag": "AMBER"
+      },
+      "non_hdl_mmol_L": {
+        "value": 4.4,
+        "approx_mg_dL": 170,
+        "flag": "AMBER"
+      },
+      "chol_hdl_ratio": {
+        "value": 5.86,
+        "flag": "AMBER"
+      }
+    },
+    "2026_sep": null,
+    "missing_2026": false,
+    "trend_note": "HDL ~40 (2022) → ~35 (2025) → 40 (Oct 2026 borderline). TC 183→204→205. LDL direct 145.6 HIGH. TG 173.5 HIGH. ApoB/A1 1.06. Smoking + obesity amplify atherogenic pattern.",
+    "2026_oct": {
+      "total_chol_mg_dL": {
+        "value": 205.0,
+        "flag": "HIGH"
+      },
+      "tg_mg_dL": {
+        "value": 173.5,
+        "flag": "HIGH"
+      },
+      "hdl_mg_dL": {
+        "value": 40.0,
+        "flag": "BORDERLINE_low"
+      },
+      "ldl_mg_dL": {
+        "value": 145.6,
+        "flag": "HIGH",
+        "note": "Direct LDL; optimal <100"
+      },
+      "vldl_mg_dL": {
+        "value": 35.0,
+        "flag": "HIGH"
+      },
+      "chol_hdl_ratio": {
+        "value": 5.13,
+        "flag": "HIGH"
+      },
+      "ldl_hdl_ratio": {
+        "value": 3.64,
+        "flag": "HIGH"
+      },
+      "non_hdl_mg_dL": {
+        "value": 165.0,
+        "flag": "HIGH",
+        "ref": "0-160"
+      },
+      "apo_a1_mg_dL": {
+        "value": 109.01,
+        "ref": "105-175"
+      },
+      "apo_b_mg_dL": {
+        "value": 115.37,
+        "ref": "60-140"
+      },
+      "apo_b_a1_ratio": {
+        "value": 1.06
+      }
+    }
+  },
+  "lft": {
+    "2022_jan": {
+      "bilirubin_total_mg_dL": {
+        "value": 1.47,
+        "flag": "HIGH",
+        "ref": "0.3-1.2"
+      },
+      "bilirubin_direct_mg_dL": {
+        "value": 0.25,
+        "flag": "HIGH_concern",
+        "ref": "0-0.2"
+      },
+      "bilirubin_indirect_mg_dL": {
+        "value": 1.22,
+        "flag": "HIGH",
+        "ref": "0.0-0.8"
+      },
+      "ast": {
+        "value": 53,
+        "flag": "HIGH",
+        "ref": "3-50"
+      },
+      "alt": {
+        "value": 104.5,
+        "flag": "HIGH",
+        "ref": "3-50"
+      },
+      "alp": {
+        "value": 78.0,
+        "flag": "GREEN"
+      },
+      "ggt": {
+        "value": 34.0,
+        "flag": "GREEN"
+      },
+      "total_protein": 7.11,
+      "albumin": 4.44,
+      "globulin": {
+        "value": 2.67,
+        "flag": "LOW",
+        "ref": "3.0-4.2"
+      },
+      "ag_ratio": 1.66,
+      "sgot_sgpt_ratio": 0.51
+    },
+    "2025_sep": {
+      "bilirubin": {
+        "value": 22,
+        "unit": "umol/L",
+        "approx_mg_dL": 1.29,
+        "flag": "AMBER"
+      },
+      "ast": {
+        "value": 46,
+        "flag": "AMBER"
+      },
+      "alp": {
+        "value": 113,
+        "flag": "GREEN"
+      },
+      "alt": {
+        "value": 69,
+        "flag": "RED"
+      },
+      "ggt": {
+        "value": 34,
+        "flag": "GREEN"
+      }
+    },
+    "2026_sep": null,
+    "missing_2026": false,
+    "trend_note": "ALT 104.5 (2022) → 69 (2025) → 103.1 (Oct 2026) — rebound high NAFLD pattern. AST 66.2 HIGH. GGT/ALP OK. NFS -2.02 = low likelihood advanced fibrosis. Weight loss remains gold standard.",
+    "2026_oct": {
+      "bilirubin_total_mg_dL": {
+        "value": 1.08,
+        "flag": "GREEN"
+      },
+      "bilirubin_direct_mg_dL": {
+        "value": 0.19,
+        "flag": "GREEN_border"
+      },
+      "bilirubin_indirect_mg_dL": {
+        "value": 0.89,
+        "flag": "HIGH_mild",
+        "ref": "0.0-0.8"
+      },
+      "ast": {
+        "value": 66.2,
+        "flag": "HIGH",
+        "ref": "3-50"
+      },
+      "alt": {
+        "value": 103.1,
+        "flag": "HIGH",
+        "ref": "3-50"
+      },
+      "alp": {
+        "value": 97.4,
+        "flag": "GREEN"
+      },
+      "ggt": {
+        "value": 42.0,
+        "flag": "GREEN"
+      },
+      "total_protein": 7.63,
+      "albumin": 4.27,
+      "globulin": 3.36,
+      "ag_ratio": 1.27,
+      "sgot_sgpt_ratio": 0.64,
+      "nafld_fibrosis_score": {
+        "value": -2.02,
+        "interpretation": "low likelihood advanced fibrosis F0–F2"
+      }
+    }
+  },
+  "kidney": {
+    "creatinine_mg_dL": {
+      "2022_jan": {
+        "value": 0.76,
+        "flag": "BELOW_their_ref_0.9_1.3_flagged_concern_by_UI",
+        "note": "Healthians UI flagged Concern vs their 0.9-1.3; clinically low-normal creat is usually not kidney failure — physician interprets (muscle mass/assay)."
+      },
+      "2025_sep": {
+        "value": 0.9,
+        "source_umol_L": 80
+      },
+      "2026_sep": {
+        "value": 1.02
+      },
+      "2026_oct": {
+        "value": 0.87,
+        "flag": "GREEN"
+      }
+    },
+    "urea_mg_dL": {
+      "2022_jan": 30,
+      "2026_sep": 23.5,
+      "2026_oct": 25.2
+    },
+    "bun_mg_dL": {
+      "2022_jan": 13.9,
+      "2026_sep": 11,
+      "2026_oct": 11.8
+    },
+    "uric_acid_mg_dL": {
+      "2022_jan": 6.0,
+      "2025_sep": {
+        "value": 316,
+        "unit": "umol/L",
+        "approx_mg_dL": 5.3
+      },
+      "2026_oct": {
+        "value": 6.8,
+        "flag": "UPPER_NORMAL",
+        "ref": "3.5-7.2"
+      }
+    },
+    "egfr": {
+      "2025_sep": 107,
+      "2026_sep": null
+    },
+    "calcium_mg_dL": {
+      "2022_jan": 9.3,
+      "2026_oct": 9.3
+    },
+    "status": "Kidneys OK overall across years",
+    "electrolytes_2026_oct": {
+      "Na": 139,
+      "K": 5.08,
+      "Cl": 103
+    }
+  },
+  "vitamins_minerals": {
+    "vit_d_ng_ml": {
+      "2022_jan": {
+        "value": 21.85,
+        "flag": "INSUFFICIENT",
+        "ref": "30-100",
+        "approx_nmol_L": 54.5
+      },
+      "2025_sep": {
+        "value": 25.2,
+        "source_nmol_L": 63,
+        "flag": "GREEN_low_normal"
+      },
+      "2026_sep": null,
+      "2026_oct": {
+        "value": 19.9,
+        "flag": "LOW",
+        "ref": "30-100"
+      }
+    },
+    "b12_pg_ml": {
+      "2022_jan": {
+        "value": 376,
+        "flag": "GREEN",
+        "ref": "211-912"
+      },
+      "2025_sep": {
+        "active_b12_pmol_L": 68,
+        "flag": "GREEN"
+      },
+      "2026_sep": null,
+      "2026_oct": {
+        "value": 161,
+        "flag": "LOW_deficiency",
+        "ref": "222-1439",
+        "note": "Frank deficiency — usually needs allopathic methylcobalamin/injection or high-dose oral; Ayurveda alone often insufficient"
+      }
+    },
+    "folate_ug_L": {
+      "2022_jan": null,
+      "2025_sep": {
+        "value": 2.3,
+        "flag": "RED",
+        "status": "deficient",
+        "note": "Nutrition quality signal — greens/legumes/fortified foods; retest with doctor"
+      },
+      "2026_sep": null,
+      "2026_oct": null
+    },
+    "iron_studies_2022": {
+      "serum_iron_ug_dL": 73.0,
+      "tibc": 328.0,
+      "uibc": 255.0,
+      "transferrin_sat_pct": 22.26,
+      "ferritin_ng_ml": 126.4
+    },
+    "homocysteine_umol_L": {
+      "2026_oct": {
+        "value": 16.85,
+        "flag": "HIGH",
+        "ref": "5-15",
+        "note": "Pairs with low B12 — CV risk enhancer; correct B12 with GP"
+      }
+    },
+    "iron_studies_2026_oct": {
+      "serum_iron_ug_dL": 75.1,
+      "tibc": 335.9,
+      "transferrin_sat_pct": 22.36,
+      "flag": "GREEN"
+    }
+  },
+  "thyroid_2022": {
+    "t3_ng_ml": 1.17,
+    "t4_ug_dL": 6.6,
+    "tsh_uIU_ml": {
+      "value": 1.799,
+      "flag": "GREEN"
+    },
+    "weight_note": "Hypothyroid unlikely as weight driver — TSH normal 2022; don't chase without symptoms"
+  },
+  "other_2022": {
+    "rheumatoid_factor": "<10 IU/mL",
+    "amylase": 39,
+    "ige_total_IU_ml": {
+      "value": 24.9,
+      "flag": "NORMAL",
+      "ref": "<158"
+    },
+    "covid_igg": {
+      "value": 29.72,
+      "status": "Reactive/exposed"
+    },
+    "hiv_jan23": {
+      "booking": "4584095882",
+      "result": "Non Reactive",
+      "s_co": 0.31
+    }
+  },
+  "other_2025": {
+    "heart_disease_stroke_risk_composite": "RED",
+    "lung_fev1": {
+      "value": 3.29,
+      "pct_predicted": 77,
+      "flag": "AMBER",
+      "smoking_note": "Amber FEV1 with smoking history — discuss with GP; supports quit for fitness ceiling"
+    },
+    "fev1_fev6": "green",
+    "smoked_tobacco_last_12mo": {
+      "value": "Yes",
+      "flag": "AMBER"
+    }
+  },
+  "other_2026": {
+    "hbsag": "Non-reactive",
+    "urine": "essentially normal",
+    "chest_xray_pa": "lungs clear, cardiac size normal, CP angles clear, hila normal, bony cage normal",
+    "eyes": "6/6 both, color vision normal",
+    "lifestyle_form": {
+      "alcohol": "yes but less than bottle wine/20cl spirits per week",
+      "smoking": "no (form) — conflicts with user-stated regular smoking from 2021 and 2025 Bluecrest YES",
+      "abroad": "UK 2y, Lima Peru 5y"
+    }
+  },
+  "weight_drivers_medical": [
+    "Energy balance + central adiposity (BMI 31.05 at 104 kg / 6'0\") — South Asians develop MetS at lower BMI (thin-fat / visceral)",
+    "NEW: HbA1c 6.0% ADA prediabetes + fasting insulin 21.45 upper-normal = insulin-resistance trajectory (FG still 91.3 OK)",
+    "Atherogenic lipids: LDL 145.6, TG 173.5, HDL 40, non-HDL 165, ApoB/A1 1.06",
+    "NAFLD pattern: ALT rebound 103.1 / AST 66.2; NFS -2.02 low advanced-fibrosis likelihood",
+    "Low B12 161 + high Hcy 16.85 + Vit D 19.9 — nutrient gaps amplify CV/metabolic stress",
+    "hs-CRP 6.85 HIGH (Oct 2026) — inflammatory residual risk; smoking/weight/sleep levers",
+    "Hypothyroid still unlikely (TSH 3.28 Oct 2026)",
+    "Honest summary: metabolic-syndrome cluster in Indian-men high-risk phenotype — NOT rare gland disease. Fitness capacity remains an asset."
+  ],
+  "smoking_analysis_summary": [
+    "Started regular smoking 2021 — still relevant for BP, lipids, hsCRP, fitness ceiling.",
+    "Do NOT frame Jan 2022 CRP as the only inflammation story; Oct 2026 hs-CRP 6.85 is NEW and actionable.",
+    "Eosinophils NORMAL again Oct 2026 after Ayurvedic Rx — maintain with vaidya; smoking cessation still helps airway/health.",
+    "HDL recovered to 40 (borderline) from ~35 in 2025 — continue lifestyle + quit.",
+    "FEV1 77% (2025) — quit supports fitness ceiling.",
+    "Quit/cut smoking remains important but framed as performance + BP/lipids/inflammation lever."
+  ],
+  "missing_tests_2026": [
+    "Folate (was deficient 2025 — not on Oct 2026 panel)",
+    "Clinic / home BP (No Data on Oct 2026 Healthians)",
+    "Waist circumference (No Data)",
+    "Cardiology echo / clinical ECG correlation (still pending from Sep 2026 Tricog)",
+    "Optional: fasting HOMA-IR formal, Lp(a), liver ultrasound / FibroScan if GP/hepatologist advises"
+  ],
+  "missing_tests_note": "Many prior gaps filled by Healthians 5 Oct 2026 (lipids, LFT, HbA1c, B12, Vit D, hs-CRP, insulin, Hcy). Folate and BP/waist still missing. Cardiology follow-up still open.",
+  "priority_flags": [
+    {
+      "item": "Cardiology ECG correlation still open (Sep 2026 Tricog)",
+      "urgency": "Book/complete cardiologist + usually echo",
+      "level": "AMBER_RED"
+    },
+    {
+      "item": "HbA1c 6.0% prediabetes + insulin 21.45 upper-normal",
+      "urgency": "Lifestyle reversal window — IDPP/D-CLIP evidence in Indians",
+      "level": "AMBER_RED"
+    },
+    {
+      "item": "B12 deficiency 161 + Homocysteine 16.85",
+      "urgency": "GP for methylcobalamin / high-dose oral — do not rely on herbs alone",
+      "level": "AMBER_RED"
+    },
+    {
+      "item": "ALT 103.1 / AST 66.2 NAFLD pattern (NFS low fibrosis)",
+      "urgency": "Weight loss gold standard + vaidya adjunct; recheck LFT",
+      "level": "AMBER"
+    },
+    {
+      "item": "Lipids LDL 145.6 / TG 173.5 / HDL 40 / non-HDL 165",
+      "urgency": "Diet + cardio return; discuss with GP/cardio if persists",
+      "level": "AMBER"
+    },
+    {
+      "item": "hs-CRP 6.85 HIGH (Oct 2026)",
+      "urgency": "Weight, sleep, quit/cut smoking, omega-3/diet; clinician interprets",
+      "level": "AMBER"
+    },
+    {
+      "item": "Vit D 19.9 low",
+      "urgency": "Supplement per GP/vaidya",
+      "level": "AMBER"
+    },
+    {
+      "item": "BP high side 2–3 y (not on Oct report)",
+      "urgency": "Home log + GP — last 134/91",
+      "level": "AMBER"
+    },
+    {
+      "item": "Weight 104 / BMI 31.05 — continue deficit",
+      "urgency": "Target further 5–10% loss",
+      "level": "AMBER"
+    },
+    {
+      "item": "Eosinophils NOW NORMAL — Ayurvedic win",
+      "urgency": "Maintain with vaidya; don't stop abruptly",
+      "level": "GREEN_WIN"
+    },
+    {
+      "item": "Quit/cut smoking since 2021",
+      "urgency": "Supports BP, lipids, hsCRP, fitness",
+      "level": "AMBER"
+    }
+  ],
+  "thyroid_2026_oct": {
+    "t3_ng_ml": 1.49,
+    "t4_ug_dL": 9.14,
+    "tsh_uIU_ml": {
+      "value": 3.28,
+      "flag": "GREEN",
+      "ref": "0.38-5.33"
+    },
+    "weight_note": "Thyroid still normal — hypothyroid unlikely as weight driver"
+  },
+  "other_2026_oct": {
+    "booking_id": "20625068428",
+    "health_score": 84,
+    "ra_factor": "<10 IU/mL",
+    "amylase": 38.9,
+    "lipase": 10,
+    "psa": 0.46,
+    "cea": 1.3,
+    "ige_total_IU_ml": {
+      "value": 119.6,
+      "flag": "GREEN_adult_range_note",
+      "note": "Adult ref broad; not allergy diagnosis alone"
+    },
+    "nafld_fibrosis_score": -2.02,
+    "bp_pulse_waist": "No Data on this report"
+  },
+  "wins_2026_oct": [
+    "Eosinophils NORMAL 5.0% / AEC 0.36 after Ayurvedic medicines (was high ~2 years)",
+    "Weight down to 104 kg (from ~110 Sep 2026 / 109.6 UK)",
+    "ESR 8 NORMAL (was 17 Jan 2022)",
+    "Kidneys, thyroid, Hb, platelets, PSA, RA factor, iron studies OK",
+    "NAFLD fibrosis score -2.02 = low likelihood advanced fibrosis"
+  ]
+}

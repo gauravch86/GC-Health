@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gaurav Chaudhary — Health & Fitness Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1419; --card: #1a2332; --border: #2a3a4d;
+    --text: #e8eef5; --muted: #8899aa; --accent: #3dd68c;
+    --amber: #f5a623; --red: #e85d5d; --blue: #5b9fd4; --purple: #7c6cf0;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+  header { padding: 1.5rem 1.75rem 1rem; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%); }
+  header h1 { margin: 0 0 0.35rem; font-size: 1.45rem; }
+  header .tagline { color: var(--accent); font-size: 0.95rem; margin: 0.25rem 0; }
+  header .meta { color: var(--muted); font-size: 0.82rem; }
+  .disclaimer { margin-top: 0.75rem; padding: 0.65rem 0.85rem; background: #243044; border-left: 3px solid var(--blue); border-radius: 4px; font-size: 0.8rem; color: #c8d4e0; }
+  nav.tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.85rem 1.25rem; background: #121a24; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  nav.tabs button { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 0.45rem 0.85rem; border-radius: 999px; cursor: pointer; font-size: 0.78rem; }
+  nav.tabs button:hover { border-color: var(--accent); color: var(--text); }
+  nav.tabs button.active { background: var(--accent); color: #0a1210; border-color: var(--accent); font-weight: 600; }
+  main { padding: 1.25rem 1.5rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; margin: 1rem 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; }
+  .card h3 { margin: 0 0 0.4rem; font-size: 0.92rem; }
+  .card .big { font-size: 1.4rem; font-weight: 700; }
+  .card .sub { color: var(--muted); font-size: 0.76rem; }
+  .green { color: var(--accent); } .amber { color: var(--amber); } .red { color: var(--red); } .blue { color: var(--blue); }
+  h2 { font-size: 1.2rem; margin: 0.5rem 0 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3.sec { font-size: 1.05rem; margin: 1.2rem 0 0.5rem; color: var(--blue); }
+  h4 { margin: 1rem 0 0.4rem; color: var(--blue); font-size: 0.95rem; }
+  ul, ol { padding-left: 1.2rem; }
+  li { margin: 0.35rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.75rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.4rem 0.5rem; text-align: left; }
+  th { background: #243044; }
+  .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin: 1rem 0; }
+  .chart-box canvas { max-height: 280px; }
+  .callout { padding: 0.85rem 1rem; border-radius: 8px; margin: 0.85rem 0; border: 1px solid var(--border); }
+  .callout.fit { background: #132a22; border-color: #2a6b4f; }
+  .callout.warn { background: #2a2418; border-color: #6b5420; }
+  .callout.info { background: #182030; border-color: #3a5070; }
+  .phase { border-left: 3px solid var(--accent); padding-left: 0.85rem; margin: 0.85rem 0; }
+  .phase h4 { margin-top: 0; color: var(--accent); }
+  .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+  .badge.g { background: #1a3d2e; color: var(--accent); }
+  .badge.a { background: #3d3018; color: var(--amber); }
+  .badge.r { background: #3d1a1a; color: var(--red); }
+  img.static { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 0.5rem 0; }
+  footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 1.5rem; border-top: 1px solid var(--border); }
+  .ignored { opacity: 0.55; font-size: 0.78rem; }
+  a { color: var(--blue); }
+  @media (max-width: 640px) {
+    header { padding: 1rem; }
+    main { padding: 1rem; }
+    nav.tabs button { font-size: 0.72rem; padding: 0.4rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Health &amp; Fitness Dashboard — Mr Gaurav Chaudhary</h1>
+  <p class="tagline">Oct 2026 update: eosinophils normalized · weight ↓104 kg · new focus on prediabetes, liver, B12 &amp; lipids.</p>
+  <p class="meta">DOB 27 Jun 1986 · O+ · 40Y · Reports: Healthians Jan 2022 · Bluecrest UK Sep 2025 · Medibuddy 16 Sep 2026 · <strong>Healthians Life Maximiser 5 Oct 2026</strong> (booking 20625068428 · Health Score 84/100)</p>
+  <div class="disclaimer">
+    <strong>Educational only — not a diagnosis or prescription.</strong>
+    Work with your <strong>GP / cardiologist</strong> and <strong>Ayurvedic doctor (vaidya)</strong>. Cardiology follow-up for the Sep 2026 ECG (“inferior infarct, probably old”) is still open.
+    Numbers are from your reports — none invented. Herb discussion points are not personal prescriptions; show them to your vaidya.
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="active" data-tab="overview">Overview</button>
+  <button data-tab="oct2026">Oct 2026 deep dive</button>
+  <button data-tab="indian">Indian-men context</button>
+  <button data-tab="ayurveda">Ayurveda next steps</button>
+  <button data-tab="eos">Eosinophils</button>
+  <button data-tab="heart">BP &amp; Heart</button>
+  <button data-tab="ecg">ECG deep dive</button>
+  <button data-tab="trends">Trends</button>
+  <button data-tab="fitplan">Fit plan</button>
+  <button data-tab="retests">Action plan</button>
+</nav>
+
+<main>
+  <!-- ========== OVERVIEW ========== -->
+  <section id="overview" class="panel active">
+    <h2>Overview — 5 Oct 2026 snapshot</h2>
+    <div class="callout fit">
+      <strong>Wins to celebrate:</strong>
+      Eosinophils <strong>NORMAL</strong> again (5.0% / AEC 0.36) after Ayurvedic medicines — were high ~2 years.
+      Weight <strong>104 kg</strong> (BMI 31.05 at 6'0" / 183 cm) — down from ~110 kg Sep 2026 and 109.6 UK.
+      ESR 8 normal · kidneys, thyroid, Hb, iron studies, PSA OK · NAFLD fibrosis score <strong>−2.02</strong> (low likelihood advanced fibrosis).
+    </div>
+    <div class="callout warn">
+      <strong>New / ongoing concerns:</strong>
+      HbA1c <strong>6.0%</strong> (ADA prediabetes) · ALT <strong>103.1</strong> / AST 66.2 · B12 <strong>161</strong> deficient · Homocysteine <strong>16.85</strong> ·
+      lipids (LDL 145.6, TG 173.5, HDL 40, TC 205) · hs-CRP <strong>6.85</strong> · Vit D 19.9 · cardiology ECG still pending.
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Weight / BMI (Oct 2026)</h3>
+        <div class="big amber">104 kg · BMI 31.05</div>
+        <div class="sub">Height 6'0" (183 cm) · was ~110 kg Sep 2026</div>
+      </div>
+      <div class="card">
+        <h3>Eosinophils — WIN</h3>
+        <div class="big green">5.0% · AEC 0.36</div>
+        <div class="sub">Was 7.2%/0.65 Sep 2026 · Ayurvedic Rx worked</div>
+      </div>
+      <div class="card">
+        <h3>HbA1c</h3>
+        <div class="big amber">6.00%</div>
+        <div class="sub">ADA prediabetes 5.7–6.4 · eAG 125.5 · FG 91.3 OK</div>
+      </div>
+      <div class="card">
+        <h3>ALT (liver)</h3>
+        <div class="big red">103.1</div>
+        <div class="sub">AST 66.2 · GGT OK · NFS −2.02 low fibrosis</div>
+      </div>
+      <div class="card">
+        <h3>Vitamin B12</h3>
+        <div class="big red">161</div>
+        <div class="sub">Deficiency · Homocysteine 16.85 HIGH</div>
+      </div>
+      <div class="card">
+        <h3>hs-CRP</h3>
+        <div class="big amber">6.85 mg/L</div>
+        <div class="sub">High inflammation stratum · new Oct 2026</div>
+      </div>
+      <div class="card">
+        <h3>Lipids</h3>
+        <div class="big amber">LDL 145.6</div>
+        <div class="sub">HDL 40 · TG 173.5 · TC 205 · non-HDL 165</div>
+      </div>
+      <div class="card">
+        <h3>ECG / BP</h3>
+        <div class="big amber">Pending</div>
+        <div class="sub">Sep ECG review still open · BP No Data this report (last 134/91)</div>
+      </div>
+    </div>
+    <h4>Medical-officer style pattern (educational)</h4>
+    <p>At ~40 years, 183 cm, 104 kg (BMI ~31), you sit in a <strong>South Asian metabolic-syndrome high-risk phenotype</strong>:
+    prediabetes (HbA1c 6%), atherogenic lipids, NAFLD-type enzymes, low-grade inflammation (hs-CRP 6.85), nutrient gaps (B12, Vit D), and prior BP elevation —
+    while retaining real fitness capacity and a proven ability to reverse markers (eos win + weight drop).
+    This is <em>not</em> a rare gland disease (TSH normal). Priority is cardiology clearance + metabolic reversal + correct B12.</p>
+    <div class="callout info">
+      Deep dives: <strong>Oct 2026</strong> · <strong>Indian-men context</strong> · <strong>Ayurveda next steps</strong> · <strong>Trends</strong> tabs.
+      Files: <code>HEALTH_ANALYSIS_DETAILED.md</code> · <code>INDIAN_MEN_CONTEXT.md</code> · <code>AYURVEDA_NEXT_STEPS.md</code> · <code>ACTION_PLAN_PRINTABLE.md</code>
+    </div>
+  </section>
+
+  <!-- ========== OCT 2026 DEEP DIVE ========== -->
+  <section id="oct2026" class="panel">
+    <h2>Oct 2026 deep dive — Healthians Life Maximiser</h2>
+    <p class="sub" style="color:var(--muted)">Booking 20625068428 · Sample 05/Oct/2026 · Barcode D1368856 · Health Score 84/100 · Educational only</p>
+
+    <h3 class="sec">Better vs worse vs new</h3>
+    <table>
+      <thead><tr><th>Domain</th><th>Change</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Eosinophils</td><td class="green"><strong>BETTER</strong></td><td>7.2% → <strong>5.0%</strong> (AEC 0.65 → 0.36) — Ayurvedic win</td></tr>
+        <tr><td>Weight</td><td class="green"><strong>BETTER</strong></td><td>~110 → <strong>104 kg</strong> · BMI 31.05</td></tr>
+        <tr><td>ESR</td><td class="green"><strong>BETTER</strong></td><td>17 (2022) → <strong>8</strong></td></tr>
+        <tr><td>HbA1c</td><td class="red"><strong>WORSE</strong></td><td>5.3 → 5.6 → <strong>6.0%</strong> prediabetes</td></tr>
+        <tr><td>ALT</td><td class="red"><strong>WORSE</strong></td><td>104.5 → 69 → <strong>103.1</strong> rebound</td></tr>
+        <tr><td>B12</td><td class="red"><strong>NEW DEFICIT</strong></td><td>376 (2022) → <strong>161</strong> deficiency</td></tr>
+        <tr><td>Homocysteine</td><td class="amber"><strong>NEW HIGH</strong></td><td><strong>16.85</strong> (ref 5–15)</td></tr>
+        <tr><td>hs-CRP</td><td class="amber"><strong>HIGH (new panel)</strong></td><td><strong>6.85</strong> (Sep 2022 comparative 3.95)</td></tr>
+        <tr><td>Lipids</td><td class="amber"><strong>STILL ADVERSE</strong></td><td>LDL 145.6 · TG 173.5 · HDL 40 · TC 205</td></tr>
+        <tr><td>Vit D</td><td class="amber"><strong>LOW</strong></td><td><strong>19.90</strong> (was ~25 UK 2025)</td></tr>
+        <tr><td>Insulin fasting</td><td class="amber"><strong>UPPER-NORMAL</strong></td><td><strong>21.45</strong> mU/L (3–25)</td></tr>
+        <tr><td>NFS fibrosis</td><td class="green"><strong>REASSURING</strong></td><td><strong>−2.02</strong> low advanced fibrosis likelihood</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec">System-by-system (Oct 2026)</h3>
+    <div class="grid">
+      <div class="card"><h3>Metabolic</h3><p>HbA1c 6% · FG 91.3 · Insulin 21.45 · eAG 125.5 — classic <em>prediabetes with IR trajectory</em> while fasting glucose still looks “fine.”</p></div>
+      <div class="card"><h3>Liver</h3><p>ALT 103.1 · AST 66.2 · ALP/GGT OK · protein OK · NFS −2.02. Pattern = NAFLD/metabolic steatosis, not cholestasis. Imaging if GP advises.</p></div>
+      <div class="card"><h3>Lipids</h3><p>Atherogenic: high LDL/non-HDL/TG, borderline HDL, ApoB 115 / ApoA1 109 / ratio 1.06.</p></div>
+      <div class="card"><h3>Nutrients</h3><p>B12 161 deficient · Hcy 16.85 · Vit D 19.9. Folate not on this panel (was 2.3 deficient 2025 — recheck).</p></div>
+      <div class="card"><h3>Inflammation</h3><p>hs-CRP 6.85 · ESR 8 OK · eos normal. Treat hsCRP as residual CV risk enhancer with clinician.</p></div>
+      <div class="card"><h3>CBC / other</h3><p>Hb 14.8 · TLC 7.1 · Plt 197 · RDW-CV 15.2 high · MPV 11 high · IgE 119.6 · PSA 0.46 · RA &lt;10 · thyroid OK.</p></div>
+    </div>
+    <div class="callout info">
+      <strong>Gaps on this report:</strong> BP / pulse / waist = “No Data.” Keep home BP log (last clinic 134/91). Cardiology echo still pending from Sep ECG.
+    </div>
+  </section>
+
+  <!-- ========== INDIAN MEN CONTEXT ========== -->
+  <section id="indian" class="panel">
+    <h2>Metabolic syndrome — Indian / South Asian men context</h2>
+    <div class="disclaimer" style="margin-bottom:1rem">Educational synthesis with public research links — not a personal diagnosis. BMI thresholds and risk calculators built on Western cohorts under-estimate South Asian risk.</div>
+
+    <h3 class="sec">Why your build matters</h3>
+    <ul>
+      <li><strong>Age ~40, height ~183 cm (6'0"), weight 104 kg, BMI ~31</strong> — obese by WHO, but South Asians often develop diabetes, CAD, and MetS at <em>lower</em> BMI than Europeans because of higher visceral fat and lower muscle mass (“thin-fat” / Y-Y paradox).</li>
+      <li>Consensus MetS waist cut-offs for South Asian men are often <strong>≥90 cm</strong> (not 102 cm). Your report had no waist — measure and track.</li>
+      <li>MetS prevalence in South Asia is commonly cited around <strong>~25–35%</strong> in mid-life adults depending on definition/setting; risk rises sharply with age and central obesity.</li>
+    </ul>
+
+    <h3 class="sec">Your cluster vs typical Indian-male pattern</h3>
+    <table>
+      <thead><tr><th>Component</th><th>You (Oct 2026)</th><th>South Asian note</th></tr></thead>
+      <tbody>
+        <tr><td>Central obesity / BMI</td><td>BMI 31.05 · wt 104</td><td>MetS risk often from BMI ~23+</td></tr>
+        <tr><td>Glucose</td><td>HbA1c 6.0% · FG OK · insulin upper-N</td><td>High IR at younger age / lower BMI</td></tr>
+        <tr><td>Lipids</td><td>TG↑ HDL borderline LDL↑</td><td>Classic atherogenic dyslipidemia</td></tr>
+        <tr><td>BP</td><td>High 2–3 y (last 134/91)</td><td>Common MetS pillar</td></tr>
+        <tr><td>Liver</td><td>ALT~103 NFS low</td><td>NAFLD highly prevalent with MetS</td></tr>
+        <tr><td>Inflammation</td><td>hsCRP 6.85</td><td>South Asians often higher baseline CRP</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec">Prediabetes — reversible window</h3>
+    <p>HbA1c <strong>6.0%</strong> is ADA prediabetes (5.7–6.4). Indian trials show lifestyle can cut diabetes incidence:</p>
+    <ul>
+      <li><strong>IDPP-1</strong> (Asian Indians with IGT): lifestyle ~28.5% relative risk reduction over ~3 years.</li>
+      <li><strong>D-CLIP</strong> (Chennai): culturally tailored lifestyle ± stepwise metformin → ~32% RRR.</li>
+      <li>CDC-style programs: ~5–7% weight loss + 150+ min/week brisk activity roughly halves progression risk in many cohorts.</li>
+    </ul>
+    <p>Your fasting glucose is still normal — this is the <strong>best time</strong> to reverse course with cardio return + diet + further weight loss.</p>
+
+    <h3 class="sec">Key source links</h3>
+    <ul>
+      <li><a href="https://link.springer.com/article/10.1007/s00125-005-0097-z" target="_blank" rel="noopener">IDPP-1 — Indian Diabetes Prevention Programme (Diabetologia)</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5033082/" target="_blank" rel="noopener">D-CLIP RCT — diabetes prevention in Asian Indians</a></li>
+      <li><a href="https://eprints.bournemouth.ac.uk/31339/1/Metabolic_syndrome_2016.pdf" target="_blank" rel="noopener">MetS prevalence South Asia systematic review</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4669860/" target="_blank" rel="noopener">hsCRP &amp; CVD — Indian perspective</a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/pii/S0914508713000427" target="_blank" rel="noopener">B12 deficiency &amp; hyperhomocysteinemia in Indian CAD</a></li>
+      <li><a href="https://cdc.gov/diabetes/prevention-type-2/prediabetes-prevent-type-2.html" target="_blank" rel="noopener">CDC prediabetes prevention overview</a></li>
+    </ul>
+    <p class="ignored">Full write-up: <code>INDIAN_MEN_CONTEXT.md</code></p>
+  </section>
+
+  <!-- ========== AYURVEDA ========== -->
+  <section id="ayurveda" class="panel">
+    <h2>Ayurveda-oriented next steps (discussion with your vaidya + GP)</h2>
+    <div class="callout warn">
+      <strong>Safety first:</strong> This is <em>not</em> a prescription. Do not stop BP/cardiac meds. Do not self-dose herbs for liver or diabetes.
+      Show this list to your <strong>Ayurvedic doctor</strong> and <strong>GP/cardiologist</strong>. Drug–herb interactions matter (especially if future diabetes/statin/BP drugs).
+      Frank <strong>B12 deficiency usually needs allopathic replacement</strong> — herbs alone are often insufficient.
+    </div>
+
+    <div class="callout fit">
+      <strong>Celebrate the eosinophil win:</strong> 5.0% / 0.36 after Ayurvedic medicines.
+      Ask your vaidya how to <strong>maintain</strong> that regimen — do not stop abruptly without guidance. Recheck eos on next CBC.
+    </div>
+
+    <div class="phase">
+      <h4>Priority 1 — Cardiology still open</h4>
+      <p>Sep 2026 ECG “inferior infarct, probably old.” Ayurveda is adjunct only. Get echo/clinical correlation first; keep training intensity as cleared.</p>
+    </div>
+    <div class="phase">
+      <h4>Priority 2 — Metabolic (HbA1c 6% / IR / weight 104)</h4>
+      <ul>
+        <li><strong>Lifestyle (pathya):</strong> cut maida/sugar/fried/sugary drinks; earlier dinner; 10–15 min walk after meals; rebuild cardio 3–5 → 5–10 km; keep weights 2–3×/wk; aim further 5–7% weight loss.</li>
+        <li><strong>Herbs often discussed (evidence variable — vaidya decides):</strong> bitter gourd (karela), fenugreek (methi), cinnamon, gymnema (gurmar), turmeric/curcumin.</li>
+        <li><strong>Caution:</strong> may potentiate future diabetes meds → hypoglycemia risk if combined without monitoring.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Priority 3 — Liver / NAFLD (ALT 103)</h4>
+      <ul>
+        <li>Weight loss is the evidence gold standard; alcohol minimize/pause.</li>
+        <li>Traditionally discussed: kutki (Picrorhiza), bhumyamalaki, turmeric; some trials of Ayurvedic formulations show ALT improvement (limited, short-term evidence).</li>
+        <li><strong>Caution:</strong> some “liver herbs” and herbominerals can themselves be hepatotoxic — only under your vaidya with LFT monitoring.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Priority 4 — Lipids (LDL 145 / HDL 40 / TG 173)</h4>
+      <ul>
+        <li>Diet + cardio first; discuss arjuna, garlic, fiber (oats/psyllium/dals) with vaidya/GP.</li>
+        <li>If lipids stay high after lifestyle, GP/cardio may discuss statin — that is medical, not herbal self-Rx.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Priority 5 — B12 161 + Homocysteine 16.85</h4>
+      <ul>
+        <li><strong>Must correct B12 with GP</strong> (methylcobalamin injections or high-dose oral — doctor decides).</li>
+        <li>Folate-rich diet (greens, dals); recheck folate (deficient 2025, not on Oct panel).</li>
+        <li>Ayurveda can support diet/agni but should not delay B12 replacement.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Priority 6 — Vit D 19.9</h4>
+      <p>Supplementation dose/duration per GP or vaidya; sun exposure + diet support; recheck in 8–12 weeks.</p>
+    </div>
+    <div class="phase">
+      <h4>Priority 7 — hs-CRP 6.85 inflammation</h4>
+      <p>Sleep 7–8 h · quit/cut smoking · further weight loss · anti-inflammatory plate (veg, dals, nuts, oily fish if eaten) · omega-3 discussion with GP.</p>
+    </div>
+    <div class="phase">
+      <h4>Priority 8 — Maintain eos regimen</h4>
+      <p>Whatever Ayurvedic protocol normalized eos — maintain under vaidya; monitor CBC; address allergy/smoking if residual triggers.</p>
+    </div>
+    <p class="ignored">Full detail: <code>AYURVEDA_NEXT_STEPS.md</code></p>
+  </section>
+
+  <!-- ========== EOS ========== -->
+  <section id="eos" class="panel">
+    <h2>Eosinophils — the Ayurvedic win</h2>
+    <div class="callout fit">
+      <strong>Timeline:</strong>
+      <span class="green">NORMAL 2022</span> (3.6% / 0.35) →
+      <span class="amber">HIGH 2025</span> (~10.8% / 0.69) →
+      <span class="amber">HIGH Sep 2026</span> (7.2% / 0.65) →
+      <span class="green"><strong>NORMAL Oct 2026</strong></span> (5.0% / 0.36) after Ayurvedic medicines.
+    </div>
+    <p>No head-pain symptom was ever the driver — it was a lab annoyance. Now resolved on paper. Keep the winning regimen with your vaidya; don’t stop abruptly. Recheck on next CBC. Quit/cut smoking still helps airway health long-term.</p>
+    <h4>If eos rises again — differential for doctor</h4>
+    <ul>
+      <li>Allergic rhinitis / sinus · eosinophilic airway (esp. with smoking)</li>
+      <li>Parasites (Peru/India travel) · medications · less often marrow (CBC otherwise OK — reassure)</li>
+    </ul>
+  </section>
+
+  <!-- ========== BP & HEART ========== -->
+  <section id="heart" class="panel">
+    <h2>BP &amp; Heart — calm, capable frame</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Blood pressure</h3>
+        <div class="big amber">Last 134/91</div>
+        <div class="sub">Oct 2026 report: No Data · 2025: 142/96 · High side ~2–3 years</div>
+      </div>
+      <div class="card">
+        <h3>2025 ECG HR</h3>
+        <div class="big blue">54</div>
+        <div class="sub">Q waves WNL — fit-runner pattern plausible</div>
+      </div>
+      <div class="card">
+        <h3>2026 Tricog ECG</h3>
+        <div class="big amber">Correlate</div>
+        <div class="sub">“Inferior infarct, probably old” — still open</div>
+      </div>
+      <div class="card">
+        <h3>hs-CRP Oct 2026</h3>
+        <div class="big amber">6.85</div>
+        <div class="sub">Inflammation risk enhancer — discuss with cardio/GP</div>
+      </div>
+    </div>
+    <div class="callout fit">
+      Fitness capacity (5–15 km at 110–115 kg UK) makes silent CAD less typical but does <strong>not</strong> cancel the ECG read.
+      New metabolic data (HbA1c 6%, lipids, Hcy, hsCRP) raise the stakes for completing cardiology follow-up.
+    </div>
+  </section>
+
+  <!-- ========== ECG (kept) ========== -->
+  <section id="ecg" class="panel">
+    <h2>ECG deep dive — runner vs “old inferior infarct”</h2>
+    <div class="callout warn">
+      <strong>Educational only — not a diagnosis.</strong> Cardiology follow-up still pending. Oct 2026 Healthians had no new ECG.
+    </div>
+    <div class="callout fit">
+      <strong>One-sentence answer:</strong>
+      You can run hard with athletic resting HR and still get an “old inferior infarct” printout because ECG computers often over-call inferior Q waves —
+      and your <strong>2025 UK ECG said Q waves were normal</strong>. Needs cardiologist + usually echo.
+    </div>
+    <table>
+      <thead><tr><th></th><th>Sep 2025 (UK)</th><th>16 Sep 2026 (Tricog)</th></tr></thead>
+      <tbody>
+        <tr><td>Rate</td><td class="amber">54</td><td>65 sinus</td></tr>
+        <tr><td>Q waves</td><td class="green">WNL</td><td class="amber">“Inferior infarct, probably old”</td></tr>
+        <tr><td>PR/QRS/QTc</td><td>Normal</td><td>PR 198 / QRS 108 / QTcB 421</td></tr>
+      </tbody>
+    </table>
+    <h4>What to do</h4>
+    <ol>
+      <li>See cardiologist — bring both ECGs</li>
+      <li>Usually echocardiogram; further tests if still unclear</li>
+      <li>Keep fixing BP, weight, smoking, lipids, B12/Hcy, hsCRP</li>
+    </ol>
+    <p class="ignored">Full write-up: <code>ECG_DEEP_DIVE.md</code></p>
+  </section>
+
+  <!-- ========== TRENDS ========== -->
+  <section id="trends" class="panel">
+    <h2>Trends 2022 → 2025 → Sep 2026 → Oct 2026</h2>
+    <p style="color:var(--muted);font-size:0.85rem">
+      Green dashed lines = normal / target limits. Gaps = not tested. Oct 2026 hs-CRP is charted as a <em>new relevant</em> marker (not COVID framing).
+    </p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="chart-box"><canvas id="cEosPct"></canvas></div>
+      <div class="chart-box"><canvas id="cEosAbs"></canvas></div>
+      <div class="chart-box"><canvas id="cAlt"></canvas></div>
+      <div class="chart-box"><canvas id="cAst"></canvas></div>
+      <div class="chart-box"><canvas id="cHba1c"></canvas></div>
+      <div class="chart-box"><canvas id="cHdl"></canvas></div>
+      <div class="chart-box"><canvas id="cLdl"></canvas></div>
+      <div class="chart-box"><canvas id="cTc"></canvas></div>
+      <div class="chart-box"><canvas id="cTg"></canvas></div>
+      <div class="chart-box"><canvas id="cB12"></canvas></div>
+      <div class="chart-box"><canvas id="cVitD"></canvas></div>
+      <div class="chart-box"><canvas id="cHscrp"></canvas></div>
+      <div class="chart-box"><canvas id="cHcy"></canvas></div>
+      <div class="chart-box"><canvas id="cBp"></canvas></div>
+      <div class="chart-box"><canvas id="cBmi"></canvas></div>
+      <div class="chart-box"><canvas id="cWt"></canvas></div>
+    </div>
+    <table>
+      <thead><tr><th>Marker</th><th>Target</th><th>Jan 2022</th><th>Sep 2025</th><th>Sep 2026</th><th>Oct 2026</th></tr></thead>
+      <tbody>
+        <tr><td>Eos %</td><td>1–6</td><td class="green">3.6</td><td class="red">~10.8</td><td class="red">7.2</td><td class="green"><strong>5.0</strong></td></tr>
+        <tr><td>Eos abs</td><td>≤0.5</td><td class="green">0.35</td><td class="amber">0.69</td><td class="amber">0.65</td><td class="green"><strong>0.36</strong></td></tr>
+        <tr><td>HbA1c %</td><td>&lt;5.7</td><td class="green">5.3</td><td class="green">5.6</td><td>—</td><td class="amber"><strong>6.0</strong></td></tr>
+        <tr><td>ALT</td><td>≤50</td><td class="red">104.5</td><td class="amber">69</td><td>—</td><td class="red"><strong>103.1</strong></td></tr>
+        <tr><td>AST</td><td>≤50</td><td class="amber">53</td><td class="amber">46</td><td>—</td><td class="red"><strong>66.2</strong></td></tr>
+        <tr><td>HDL</td><td>≥40</td><td class="amber">40</td><td class="red">~35</td><td>—</td><td class="amber"><strong>40</strong></td></tr>
+        <tr><td>LDL</td><td>&lt;100 opt.</td><td class="amber">130</td><td>—</td><td>—</td><td class="red"><strong>145.6</strong></td></tr>
+        <tr><td>TC</td><td>&lt;200</td><td class="green">183</td><td class="amber">~204</td><td>—</td><td class="amber"><strong>205</strong></td></tr>
+        <tr><td>TG</td><td>&lt;150</td><td class="amber">167</td><td class="green">~159</td><td>—</td><td class="amber"><strong>173.5</strong></td></tr>
+        <tr><td>B12</td><td>&gt;222</td><td class="green">376</td><td>—</td><td>—</td><td class="red"><strong>161</strong></td></tr>
+        <tr><td>Vit D</td><td>≥30</td><td class="amber">21.85</td><td class="amber">25.2</td><td>—</td><td class="amber"><strong>19.9</strong></td></tr>
+        <tr><td>hs-CRP</td><td>&lt;1–3</td><td class="red">8.12*</td><td>—</td><td>—</td><td class="red"><strong>6.85</strong></td></tr>
+        <tr><td>Hcy</td><td>5–15</td><td>—</td><td>—</td><td>—</td><td class="amber"><strong>16.85</strong></td></tr>
+        <tr><td>Weight</td><td>—</td><td>—</td><td>109.6</td><td>110</td><td class="green"><strong>104</strong></td></tr>
+        <tr><td>BMI</td><td>&lt;25 / SA&lt;23</td><td>—</td><td class="red">32.7</td><td class="amber">31.1</td><td class="amber"><strong>31.05</strong></td></tr>
+        <tr><td>BP</td><td>&lt;120/80</td><td>—</td><td class="amber">142/96</td><td class="amber">134/91</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="ignored">*2022 hs-CRP retained in data; do not invent COVID causation for 2026. Height prefer 183 cm / 6'0" for Oct BMI.</p>
+  </section>
+
+  <!-- ========== FIT PLAN ========== -->
+  <section id="fitplan" class="panel">
+    <h2>Path to totally fit — updated Oct 2026</h2>
+    <div class="callout fit">
+      You’ve already dropped ~6 kg and normalized eos. Next engine: cardio return + protein-forward Indian plate + B12 correction + cardiology clearance.
+      Ayurveda = supportive adjunct under your vaidya — not instead of GP/cardio.
+    </div>
+    <div class="phase">
+      <h4>Phase 0 — This week</h4>
+      <ul>
+        <li>Cardiology ECG review / echo if advised</li>
+        <li>GP: B12 replacement plan + Vit D + home BP log</li>
+        <li>Vaidya: maintain eos regimen; discuss metabolic/liver pathya</li>
+        <li>Quit or sharply cut smoking</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Phase 1 — 30 days</h4>
+      <ul>
+        <li>Walk → jog back to 3–5 km then 5–10 km; weights 2–3×/wk</li>
+        <li>Deficit ~300–500 kcal; cut sugar/maida/fried; walk after meals</li>
+        <li>Target toward ~98–100 kg as first checkpoint (doctor-aware)</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <h4>Phase 2 — 90 days</h4>
+      <ul>
+        <li>Retest HbA1c, lipids, LFT, B12, Hcy, Vit D, hs-CRP, eos</li>
+        <li>Goal: HbA1c toward &lt;5.7 · ALT down · B12 replete · further weight loss</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== ACTION ========== -->
+  <section id="retests" class="panel">
+    <h2>Action plan &amp; retests</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Why</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Cardiology review</td><td>Sep 2026 ECG infarct read</td><td>This week / ASAP</td></tr>
+        <tr><td>GP: B12 ± folate</td><td>B12 161 · Hcy 16.85 · folate was low 2025</td><td>This week</td></tr>
+        <tr><td>Vit D supplement plan</td><td>19.9 low</td><td>This week</td></tr>
+        <tr><td>Home BP log</td><td>No BP on Oct report; last 134/91</td><td>Start now</td></tr>
+        <tr><td>Vaidya follow-up</td><td>Maintain eos win; metabolic/liver herbs</td><td>Soon</td></tr>
+        <tr><td>Retest panel ~90 days</td><td>HbA1c, lipids, LFT, B12, Hcy, Vit D, hsCRP, CBC/eos</td><td>~Jan 2027</td></tr>
+        <tr><td>Waist measurement</td><td>South Asian MetS (≥90 cm men)</td><td>This week</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">Printable: <code>ACTION_PLAN_PRINTABLE.md</code> · Delivery brief: <code>DELIVERY_SUMMARY.md</code></div>
+  </section>
+</main>
+
+<footer>
+  Educational personal dashboard · Oct 2026 Healthians update · Not medical advice · Work with GP, cardiologist &amp; vaidya
+</footer>
+
+<script>
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+const labels = ['Jan 2022', 'Sep 2025', 'Sep 2026', 'Oct 2026'];
+const tick = { color: '#a8b8c8' };
+const grid = { color: '#2a3a4d' };
+
+function hLine(y, text, color = '#3dd68c') {
+  return {
+    type: 'line', yMin: y, yMax: y,
+    borderColor: color, borderWidth: 2, borderDash: [6, 4],
+    label: {
+      display: true, content: text, position: 'end',
+      backgroundColor: 'rgba(15,20,25,0.85)', color: color,
+      font: { size: 11, weight: '600' }
+    }
+  };
+}
+
+function mkChart(id, cfg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const { title, datasets, ySuggestedMax, annotations, yTitle, type } = cfg;
+  new Chart(el, {
+    type: type || (datasets.length > 1 ? 'bar' : 'line'),
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: {
+        legend: { labels: { color: '#a8b8c8' } },
+        title: { display: true, text: title, color: '#e8eef5', font: { size: 13 } },
+        annotation: { annotations: annotations || {} }
+      },
+      scales: {
+        x: { ticks: tick, grid },
+        y: {
+          ticks: tick, grid, suggestedMax: ySuggestedMax,
+          title: yTitle ? { display: true, text: yTitle, color: '#a8b8c8' } : undefined
+        }
+      }
+    }
+  });
+}
+
+mkChart('cEosPct', {
+  type: 'line', title: 'Eosinophils % — NORMAL again Oct 2026', yTitle: '%', ySuggestedMax: 14,
+  datasets: [{
+    label: 'Eos %', data: [3.6, 10.8, 7.2, 5.0],
+    borderColor: '#3dd68c', backgroundColor: 'rgba(61,214,140,0.12)',
+    tension: 0.25, fill: true, pointRadius: 5,
+    pointBackgroundColor: ['#3dd68c','#e85d5d','#e85d5d','#3dd68c']
+  }],
+  annotations: { nmax: hLine(6, 'Normal max 6%'), nmin: hLine(1, 'Normal min 1%', '#5b9fd4') }
+});
+
+mkChart('cEosAbs', {
+  type: 'bar', title: 'Eosinophils absolute — vs ~0.5', yTitle: '×10⁹/L', ySuggestedMax: 1,
+  datasets: [{ label: 'Eos abs', data: [0.35, 0.69, 0.65, 0.36],
+    backgroundColor: ['#3dd68c','#f5a623','#f5a623','#3dd68c'] }],
+  annotations: { nmax: hLine(0.5, 'Upper normal ~0.5') }
+});
+
+mkChart('cAlt', {
+  type: 'bar', title: 'ALT — rebound high Oct 2026', yTitle: 'U/L', ySuggestedMax: 120,
+  datasets: [{ label: 'ALT', data: [104.5, 69, null, 103.1],
+    backgroundColor: ['#e85d5d','#f5a623','#2a3a4d','#e85d5d'] }],
+  annotations: { nmax: hLine(50, 'Normal max ~50') }
+});
+
+mkChart('cAst', {
+  type: 'bar', title: 'AST — vs ~50', yTitle: 'U/L', ySuggestedMax: 80,
+  datasets: [{ label: 'AST', data: [53, 46, null, 66.2],
+    backgroundColor: ['#f5a623','#f5a623','#2a3a4d','#e85d5d'] }],
+  annotations: { nmax: hLine(50, 'Normal max ~50') }
+});
+
+mkChart('cHba1c', {
+  type: 'line', title: 'HbA1c % — prediabetes line 5.7', yTitle: '%', ySuggestedMax: 7,
+  datasets: [{ label: 'HbA1c', data: [5.3, 5.6, null, 6.0],
+    borderColor: '#f5a623', tension: 0.2, spanGaps: true, pointRadius: 5,
+    pointBackgroundColor: ['#3dd68c','#3dd68c','#2a3a4d','#f5a623'] }],
+  annotations: {
+    pre: hLine(5.7, 'Prediabetes ≥5.7', '#f5a623'),
+    dm: hLine(6.5, 'Diabetes ≥6.5', '#e85d5d')
+  }
+});
+
+mkChart('cHdl', {
+  type: 'bar', title: 'HDL — target ≥40', yTitle: 'mg/dL', ySuggestedMax: 60,
+  datasets: [{ label: 'HDL', data: [40, 35, null, 40],
+    backgroundColor: ['#f5a623','#e85d5d','#2a3a4d','#f5a623'] }],
+  annotations: { tgt: hLine(40, 'Min healthy HDL 40', '#5b9fd4') }
+});
+
+mkChart('cLdl', {
+  type: 'bar', title: 'LDL direct — optimal <100', yTitle: 'mg/dL', ySuggestedMax: 180,
+  datasets: [{ label: 'LDL', data: [130, null, null, 145.6],
+    backgroundColor: ['#f5a623','#2a3a4d','#2a3a4d','#e85d5d'] }],
+  annotations: { opt: hLine(100, 'Optimal <100', '#3dd68c') }
+});
+
+mkChart('cTc', {
+  type: 'bar', title: 'Total cholesterol — desirable <200', yTitle: 'mg/dL', ySuggestedMax: 250,
+  datasets: [{ label: 'TC', data: [183, 204, null, 205],
+    backgroundColor: ['#3dd68c','#f5a623','#2a3a4d','#f5a623'] }],
+  annotations: { des: hLine(200, 'Desirable <200') }
+});
+
+mkChart('cTg', {
+  type: 'bar', title: 'Triglycerides — desirable <150', yTitle: 'mg/dL', ySuggestedMax: 220,
+  datasets: [{ label: 'TG', data: [167, 159, null, 173.5],
+    backgroundColor: ['#f5a623','#3dd68c','#2a3a4d','#f5a623'] }],
+  annotations: { des: hLine(150, 'Desirable <150') }
+});
+
+mkChart('cB12', {
+  type: 'bar', title: 'Vitamin B12 — deficiency <222', yTitle: 'pg/mL', ySuggestedMax: 450,
+  datasets: [{ label: 'B12', data: [376, null, null, 161],
+    backgroundColor: ['#3dd68c','#2a3a4d','#2a3a4d','#e85d5d'] }],
+  annotations: { lo: hLine(222, 'Lab low cut-off 222', '#e85d5d') }
+});
+
+mkChart('cVitD', {
+  type: 'bar', title: 'Vitamin D 25-OH — target ≥30', yTitle: 'ng/mL', ySuggestedMax: 40,
+  datasets: [{ label: 'Vit D', data: [21.85, 25.2, null, 19.9],
+    backgroundColor: ['#f5a623','#f5a623','#2a3a4d','#e85d5d'] }],
+  annotations: { tgt: hLine(30, 'Sufficiency ≥30', '#3dd68c') }
+});
+
+mkChart('cHscrp', {
+  type: 'bar', title: 'hs-CRP — AHA high stratum >3', yTitle: 'mg/L', ySuggestedMax: 10,
+  datasets: [{ label: 'hs-CRP', data: [8.12, null, null, 6.85],
+    backgroundColor: ['#e85d5d','#2a3a4d','#2a3a4d','#e85d5d'] }],
+  annotations: {
+    hi: hLine(3, 'High risk >3', '#e85d5d'),
+    mid: hLine(1, 'Low <1', '#3dd68c')
+  }
+});
+
+mkChart('cHcy', {
+  type: 'bar', title: 'Homocysteine — ref ≤15', yTitle: 'µmol/L', ySuggestedMax: 22,
+  datasets: [{ label: 'Hcy', data: [null, null, null, 16.85],
+    backgroundColor: ['#2a3a4d','#2a3a4d','#2a3a4d','#f5a623'] }],
+  annotations: { hi: hLine(15, 'Upper ref 15', '#e85d5d') }
+});
+
+new Chart(document.getElementById('cBp'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      { label: 'Systolic', data: [null, 142, 134, null], backgroundColor: '#e85d5d' },
+      { label: 'Diastolic', data: [null, 96, 91, null], backgroundColor: '#f5a623' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { labels: { color: '#a8b8c8' } },
+      title: { display: true, text: 'BP — Oct 2026 No Data (home log!)', color: '#e8eef5' },
+      annotation: { annotations: { sys: hLine(120, 'Ideal sys 120', '#5b9fd4'), dia: hLine(80, 'Ideal dia 80') } }
+    },
+    scales: {
+      x: { ticks: tick, grid },
+      y: { ticks: tick, grid, suggestedMax: 160, title: { display: true, text: 'mmHg', color: '#a8b8c8' } }
+    }
+  }
+});
+
+mkChart('cBmi', {
+  type: 'bar', title: 'BMI — SA risk rises well below 30', yTitle: 'kg/m²', ySuggestedMax: 40,
+  datasets: [{ label: 'BMI', data: [null, 32.7, 31.12, 31.05],
+    backgroundColor: ['#2a3a4d','#e85d5d','#f5a623','#f5a623'] }],
+  annotations: {
+    sa: hLine(23, 'SA overweight ~23', '#5b9fd4'),
+    ow: hLine(25, 'WHO OW ≥25', '#f5a623'),
+    ob: hLine(30, 'Obese ≥30', '#e85d5d')
+  }
+});
+
+mkChart('cWt', {
+  type: 'line', title: 'Weight (kg) — down to 104', yTitle: 'kg', ySuggestedMax: 120,
+  datasets: [{ label: 'Weight', data: [null, 109.6, 110, 104],
+    borderColor: '#7c6cf0', tension: 0.2, spanGaps: true, pointRadius: 5,
+    pointBackgroundColor: ['#2a3a4d','#f5a623','#f5a623','#3dd68c'] }],
+  annotations: {}
+});
+</script>
+</body>
+</html>
